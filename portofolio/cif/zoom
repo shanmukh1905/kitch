@@ -1,0 +1,21 @@
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const maxScrollTop = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollFraction = scrollTop / maxScrollTop;
+
+    // Define the minimum and maximum zoom levels
+    const minZoom = 1; // Minimum zoom level
+    const maxZoom = 10; // Maximum zoom level
+
+    // Calculate the zoom level based on the scroll fraction
+    const zoom = minZoom + (maxZoom - minZoom) * scrollFraction*100;
+
+    // Limit the zoom level to the defined bounds
+    const clampedZoom = Math.max(minZoom, Math.min(maxZoom, zoom));
+
+    // Update the camera position to achieve the zoom effect
+    camera.position.z = clampedZoom;
+
+    // Render the scene after updating the camera
+    renderer.render(scene, camera);
+});

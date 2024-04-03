@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Selection Form</title>
+</head>
+<body>
+    <h2>Department Selection Form</h2>
+    <form id="departmentForm">
+        <label for="department">Department:</label><br>
+        <select id="department" name="department">
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electrical/Electronics">Electrical/Electronics</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Aerospace">Aerospace</option>
+            <option value="Biotech">Biotech</option>
+            <option value="Civil">Civil</option>
+            <option value="Chemical">Chemical</option>
+        </select><br><br>
+        
+        <!-- Add other form fields here -->
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Listing Data</h2>
+    <div id="listingTable"></div>
+
+    <script>
+        document.getElementById('departmentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get selected department
+            const department = document.getElementById('department').value;
+
+            // Fetch listing data
+            fetch(`/fetch-listing?department=${department}`)
+            .then(response => response.json())
+            .then(data => {
+                // Build table HTML
+                let tableHtml = '<table border="1">';
+                tableHtml += '<tr><th>Name</th><th>Description</th></tr>';
+                data.forEach(item => {
+                    tableHtml += `<tr><td>${item.name}</td><td>${item.description}</td></tr>`;
+                });
+                tableHtml += '</table>';
+
+                // Display table
+                document.getElementById('listingTable').innerHTML = tableHtml;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

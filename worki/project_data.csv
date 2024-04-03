@@ -1,0 +1,3 @@
+department,project_name,project_details,status,name_of_faculty,email_id,contact,cabin
+Computer Science,Project A,Details A,Active,John Doe,john@example.com,1234567890,C1
+Electrical/Electronics,Project B,Details B,Inactive,Jane Doe,jane@example.com,9876543210,C2

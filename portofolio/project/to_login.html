@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Container</title>
+<style>
+    body {
+        margin: 0; /* Remove default body margin */
+        height: 100vh; /* Full viewport height */
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        background-color: black; /* Set background color for the body */
+    }
+
+    .form_container {
+        background-color: blanchedalmond;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a shadow effect */
+        width: 300px; /* Set a fixed width for the form container */
+    }
+
+    .form_container input[type="text"],
+    .form_container button {
+        margin-bottom: 10px;
+        width: calc(100% - 20px); /* Subtract padding to maintain width */
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+    .form_container button {
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+    }
+
+    .form_container button:hover {
+        background-color: #0056b3;
+    }
+</style>
+</head>
+<body>
+
+<div class="form_container">
+    <form id="myForm">
+        <input type="text" placeholder="Enter your name" id="name" name="name">
+        <input type="text" placeholder="Enter your email" id="email" name="email">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+    </form>
+</div>
+
+</body>
+</html>

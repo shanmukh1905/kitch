@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department Selection Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, button {
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Department Selection Form</h2>
+    <form id="departmentForm">
+        <label for="department">Department:</label><br>
+        <select id="department" name="department">
+            <option value="Computer Science">Computer Science</option>
+            <option value="Electrical/Electronics">Electrical/Electronics</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Aerospace">Aerospace</option>
+            <option value="Biotech">Biotech</option>
+            <option value="Civil">Civil</option>
+            <option value="Chemical">Chemical</option>
+        </select><br><br>
+        
+        <!-- Add other form fields here -->
+        
+        <button type="submit">Submit</button>
+    </form>
+
+    <h2>Listing Data</h2>
+    <div id="listingTable"></div>
+
+    <script>
+        document.getElementById('departmentForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Get selected department
+            const department = document.getElementById('department').value;
+
+            // Fetch listing data
+            fetch(`/fetch-listing?department=${department}`)
+            .then(response => response.json())
+            .then(data => {
+                // Build table HTML
+                let tableHtml = '<table border="1">';
+                tableHtml += '<tr><th>Name</th><th>Description</th></tr>';
+                data.forEach(item => {
+                    tableHtml += `<tr><td>${item.name}</td><td>${item.description}</td></tr>`;
+                });
+                tableHtml += '</table>';
+
+                // Display table
+                document.getElementById('listingTable').innerHTML = tableHtml;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
